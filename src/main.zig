@@ -1,5 +1,5 @@
 const std = @import("std");
-const print = @import("std").debug.print;
+const dbg = @import("std").debug.print;
 
 const W = @TypeOf(std.io.getStdOut().writer());
 
@@ -9,7 +9,10 @@ fn do_colors(w: W) !void {
 
 pub fn main() !void {
     const w = std.io.getStdOut().writer();
-    print("is do debuggy things\n", .{});
+    dbg("is do debuggy things\n", .{});
     try do_colors(w);
     try w.print("jamenhahåå {} \n", .{"gröt"});
 }
+
+// not a modeline, but a mapping:
+// noremap <Plug>ch:ir <cmd>update<cr>:!time zig build race<cr>
