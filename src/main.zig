@@ -1,9 +1,9 @@
 const std = @import("std");
 const print = @import("std").debug.print;
 
-const T = @TypeOf(std.io.getStdOut().writer());
+const W = @TypeOf(std.io.getStdOut().writer());
 
-fn do_colors(w: T) !void {
+fn do_colors(w: W) !void {
     try w.print("\x1bx", .{});
 }
 
