@@ -4,7 +4,7 @@ const dbg = @import("std").debug.print;
 const W = @TypeOf(std.io.getStdOut().writer());
 
 fn do_colors(w: W) !void {
-    try w.print("\x1b[1m", .{});
+    try w.print("\x1b[38;2;40;80;100m", .{});
 }
 
 pub fn main() !void {
