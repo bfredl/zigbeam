@@ -15,10 +15,11 @@ fn reset(w: W) !void {
 
 pub fn main() !void {
     const w = std.io.getStdOut().writer();
-    dbg("is do debuggy things\n", .{});
+
     const rgb = .{ .r = 100, .g = 140, .b = 255 };
     try do_colors(w, rgb);
     try w.print("jamenhahåå {} \n", .{"gröt"});
+
     try reset(w);
 }
 
