@@ -6,8 +6,9 @@ const W = @TypeOf(std.io.getStdOut().writer());
 const I = i32;
 const RGB = struct { r: I, g: I, b: I };
 
-fn do_colors(w: W, rgb: RGB) !void {
-    try w.print("\x1b[38;2;{};{};{}m", .{ rgb.r, rgb.g, rgb.b });
+fn do_colors(w: W, fg: bool, rgb: RGB) !void {
+    const kod = if (fg) "3" else "4";
+    try w.print("\x1b[{}8;2;{};{};{}m", .{ kod, rgb.r, rgb.g, rgb.b });
 }
 
 fn do_wc(w: W, wc: u21) !void {
@@ -24,10 +25,11 @@ pub fn main() !void {
     const w = std.io.getStdOut().writer();
 
     const rgb = .{ .r = 100, .g = 140, .b = 255 };
-    try do_colors(w, rgb);
+    try do_colors(w, true, rgb);
     try w.print("jamenhahåå {} \n", .{"gröt"});
+    try reset(w);
 
-    try do_colors(w, .{ .r = 200, .g = 140, .b = 50 });
+    try do_colors(w, false, .{ .r = 000, .g = 100, .b = 50 });
     try do_wc(w, 1345);
     try w.print("\n", .{});
 
