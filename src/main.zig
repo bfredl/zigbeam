@@ -21,8 +21,32 @@ fn reset(w: W) !void {
     try w.print("\x1b[0m", .{});
 }
 
+const TheFort = struct {
+    const Self = @This();
+    const DataList = std.ArrayList(i32);
+
+    data: DataList,
+
+    pub fn init(allocator: *std.mem.Allocator) Self {
+        return Self{ .data = DataList.init(allocator) };
+    }
+
+    pub fn push(self: *Self, val: i32) !void {
+        try self.data.append(val);
+    }
+
+    pub fn dup(self: Self) !void {
+        self.data.append(val);
+        aa;
+    }
+};
+
 pub fn main() !void {
+    const allocator = std.testing.allocator;
     const w = std.io.getStdOut().writer();
+    var fort = TheFort.init(allocator);
+
+    try fort.push(3);
 
     const rgb = .{ .r = 100, .g = 140, .b = 255 };
     try doColors(w, true, rgb);
@@ -37,4 +61,4 @@ pub fn main() !void {
 }
 
 // not a modeline, but a mapping:
-// noremap <Plug>ch:ir <cmd>update<cr><cmd>call chansend(ww, "time zig build race\n")<cr>
+// noremap <buffer> <Plug>ch:ir <cmd>update<cr><cmd>call chansend(ww, "time zig build race\n")<cr>
